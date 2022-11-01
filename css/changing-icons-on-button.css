@@ -1,0 +1,96 @@
+
+
+.container {
+    width: 600px;
+    height: 300px;
+    border: 2px solid silver;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    border: none;
+    border-radius: 3px;
+
+    margin: 0;
+    padding: 10px 30px;
+
+    background-color: rgb(0, 119, 54);
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    /* анимирование цвета фона в течении 250мс по линейной функции времени */
+    transition: background-color 250ms linear;
+    /* визуально скрывает всё что выходит за пределы границ нашего элемента (кнопки) */
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    /* background-color: orange; */
+    margin-right: 10px;
+    /* анимируем transform (сдвиг иконки вверх который задан в .btn: hover::before) */
+    transition: transform 250ms linear;
+
+    background-image: url(../svg/envelope.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+.btn:hover::before,
+.btn:focus::before {
+    transform: translateY(-35px);
+}
+
+
+.btn::after {
+    /* позиционируем вторую иконку так, чтоб она стала четко на место первой */
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    /* позиционируемая иконка горизонтально выровнялась с первой */
+
+    /* чтоб выровнять по вертикали применяем transform: translateY(-50%) который 
+    поднимает позицию на половину своего размера*/
+
+    /* используем функцию калк, для смещения иконки за пределы границ кнопки, на такое же расстояние, 
+    как смещается первая иконка при ховере */
+    transform: translateY(calc(-50% + 35px));
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    /* background-color: rgb(255, 0, 64); */
+    /* анимируем transform (сдвиг иконки вверх который задан в .btn: hover::before) */
+    transition: transform 250ms linear;
+
+    background-image: url(../svg/smartphone.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+
+        /* при ховере transform: translateY(-50%) 
+        поднимает позицию на половину своего размера 
+        и занимает позицию на которой до ховера стояла первая иконка*/
+.btn:hover::after,
+.btn:focus::after {
+    transform: translateY(-50%);
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: rgb(75, 148, 245);
+}
